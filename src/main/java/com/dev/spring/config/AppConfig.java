@@ -19,8 +19,12 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.dev.spring.dao"
 })
 public class AppConfig {
-    @Autowired
     private Environment environment;
+
+    @Autowired
+    public AppConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public DataSource getDataSource() {
