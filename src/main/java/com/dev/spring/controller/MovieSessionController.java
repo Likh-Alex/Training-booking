@@ -47,13 +47,6 @@ public class MovieSessionController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping
-    public List<MovieSessionResponseDto> getAll() {
-        return movieSessionService.getAll().stream()
-                .map(mapper::toDto)
-                .collect(Collectors.toList());
-    }
-
     @PutMapping("/{id}")
     public void update(@PathVariable Long id,
                        @RequestBody MovieSessionRequestDto requestDto) {
