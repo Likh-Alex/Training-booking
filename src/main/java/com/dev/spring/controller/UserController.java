@@ -1,9 +1,9 @@
 package com.dev.spring.controller;
 
-import com.dev.spring.dto.UserResponseDto;
+import com.dev.spring.dto.response.UserResponseDto;
 import com.dev.spring.model.User;
 import com.dev.spring.service.UserService;
-import com.dev.spring.service.impl.UserMapper;
+import com.dev.spring.service.mapper.UserMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

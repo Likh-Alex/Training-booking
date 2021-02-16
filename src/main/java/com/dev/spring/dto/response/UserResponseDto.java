@@ -1,4 +1,4 @@
-package com.dev.spring.dto;
+package com.dev.spring.dto.response;
 
 public class UserResponseDto {
     private Long id;

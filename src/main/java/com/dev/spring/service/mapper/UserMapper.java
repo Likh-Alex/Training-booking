@@ -1,6 +1,6 @@
-package com.dev.spring.service.impl;
+package com.dev.spring.service.mapper;
 
-import com.dev.spring.dto.UserResponseDto;
+import com.dev.spring.dto.response.UserResponseDto;
 import com.dev.spring.model.User;
 import org.springframework.stereotype.Component;
 
