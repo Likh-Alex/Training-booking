@@ -35,16 +35,16 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrdersHistory(@RequestParam Long id) {
-        List<Order> ordersHistory = orderService.getOrdersHistory(userService.get(id));
+    public List<OrderResponseDto> getOrdersHistory(@RequestParam Long userId) {
+        List<Order> ordersHistory = orderService.getOrdersHistory(userService.get(userId));
         return ordersHistory.stream()
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @PostMapping("/complete")
-    public void completeOrder(@RequestParam Long id) {
+    public void completeOrder(@RequestParam Long userId) {
         orderService.completeOrder(shoppingCartService
-                .getByUser(userService.get(id)));
+                .getByUser(userService.get(userId)));
     }
 }
