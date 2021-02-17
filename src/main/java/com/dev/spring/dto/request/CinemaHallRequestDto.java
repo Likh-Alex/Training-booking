@@ -1,6 +1,11 @@
 package com.dev.spring.dto.request;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class CinemaHallRequestDto {
+    @NotEmpty
+    @Size(min = 10, max = 100)
     private int capacity;
     private String description;
 

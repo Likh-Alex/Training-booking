@@ -3,11 +3,8 @@ package com.dev.spring.controller;
 import com.dev.spring.dto.response.UserResponseDto;
 import com.dev.spring.service.UserService;
 import com.dev.spring.service.mapper.UserMapper;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,18 +19,6 @@ public class UserController {
     public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
-    }
-
-    @GetMapping("/{userId}")
-    public UserResponseDto get(@PathVariable Long userId) {
-        return userMapper.toDto(userService.get(userId));
-    }
-
-    @GetMapping
-    public List<UserResponseDto> getAll() {
-        return userService.listUsers().stream()
-                .map(userMapper::toDto)
-                .collect(Collectors.toList());
     }
 
     @GetMapping("/by-email")

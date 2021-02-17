@@ -2,6 +2,7 @@ package com.dev.spring.controller;
 
 import com.dev.spring.dto.response.OrderResponseDto;
 import com.dev.spring.model.Order;
+import com.dev.spring.model.User;
 import com.dev.spring.service.OrderService;
 import com.dev.spring.service.ShoppingCartService;
 import com.dev.spring.service.UserService;
@@ -9,10 +10,11 @@ import com.dev.spring.service.mapper.OrderMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,16 +37,24 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrdersHistory(@RequestParam Long userId) {
-        List<Order> ordersHistory = orderService.getOrdersHistory(userService.get(userId));
+    public List<OrderResponseDto> getOrdersHistory(Authentication authentication) {
+        UserDetails details = (UserDetails) authentication.getPrincipal();
+        String userEmail = details.getUsername();
+        User user = userService.findByEmail(userEmail).orElseThrow(()
+                -> new RuntimeException("No user with email: " + userEmail));
+        List<Order> ordersHistory = orderService.getOrdersHistory(userService.get(user.getId()));
         return ordersHistory.stream()
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @PostMapping("/complete")
-    public void completeOrder(@RequestParam Long userId) {
+    public void completeOrder(Authentication authentication) {
+        UserDetails details = (UserDetails) authentication.getPrincipal();
+        String userEmail = details.getUsername();
+        User user = userService.findByEmail(userEmail).orElseThrow(()
+                -> new RuntimeException("No user with email: " + userEmail));
         orderService.completeOrder(shoppingCartService
-                .getByUser(userService.get(userId)));
+                .getByUser(userService.get(user.getId())));
     }
 }
