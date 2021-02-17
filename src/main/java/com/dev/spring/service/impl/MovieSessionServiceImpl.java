@@ -41,4 +41,10 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     public void delete(Long id) {
         movieSessionDao.delete(id);
     }
+
+    @Override
+    public MovieSession get(Long id) {
+        return movieSessionDao.get(id).orElseThrow(()
+                -> new RuntimeException("Can not get user with id: " + id));
+    }
 }

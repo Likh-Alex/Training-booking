@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao {
-    void add(User user);
+    User add(User user);
 
     Optional<User> get(Long id);
 
     List<User> listUsers();
+
+    Optional<User> findByEmail(String email);
 }
