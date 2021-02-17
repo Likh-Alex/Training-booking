@@ -1,12 +1,11 @@
 package com.dev.spring.dto.response;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderResponseDto {
     private Long id;
     private List<Long> ticketIds;
-    private LocalDateTime orderDate;
+    private String orderDate;
     private Long userId;
 
     public Long getId() {
@@ -25,11 +24,11 @@ public class OrderResponseDto {
         this.ticketIds = ticketIds;
     }
 
-    public LocalDateTime getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
