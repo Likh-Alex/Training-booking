@@ -2,7 +2,6 @@ package com.dev.spring.dto.request;
 
 import com.dev.spring.annotation.EmailConstraint;
 import com.dev.spring.annotation.PasswordMatch;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @PasswordMatch.List({
@@ -14,7 +13,6 @@ import javax.validation.constraints.Size;
 })
 public class UserRequestDto {
     @EmailConstraint
-    @NotNull
     private String email;
     @Size(min = 4, max = 30)
     private String password;

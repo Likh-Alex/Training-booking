@@ -6,11 +6,14 @@ import com.dev.spring.service.UserService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
@@ -19,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.add(user);
     }
 

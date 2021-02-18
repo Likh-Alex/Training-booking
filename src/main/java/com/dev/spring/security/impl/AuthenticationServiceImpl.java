@@ -5,15 +5,12 @@ import com.dev.spring.security.AuthenticationService;
 import com.dev.spring.service.ShoppingCartService;
 import com.dev.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public AuthenticationServiceImpl(UserService userService,
@@ -26,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(password);
         User userFromDb = userService.add(user);
         shoppingCartService.registerNewShoppingCart(userFromDb);
         return userFromDb;
