@@ -42,7 +42,7 @@ public class ShoppingCartController {
         String userEmail = details.getUsername();
         User user = userService.findByEmail(userEmail).orElseThrow(()
                 -> new RuntimeException("No user with email: " + userEmail));
-        ShoppingCart shoppingCart = shoppingCartService.getByUser(userService.get(user.getId()));
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         return shoppingCartMapper.toDto(shoppingCart);
     }
 

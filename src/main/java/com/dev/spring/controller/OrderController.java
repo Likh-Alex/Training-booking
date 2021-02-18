@@ -42,7 +42,7 @@ public class OrderController {
         String userEmail = details.getUsername();
         User user = userService.findByEmail(userEmail).orElseThrow(()
                 -> new RuntimeException("No user with email: " + userEmail));
-        List<Order> ordersHistory = orderService.getOrdersHistory(userService.get(user.getId()));
+        List<Order> ordersHistory = orderService.getOrdersHistory(user);
         return ordersHistory.stream()
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());
@@ -55,6 +55,6 @@ public class OrderController {
         User user = userService.findByEmail(userEmail).orElseThrow(()
                 -> new RuntimeException("No user with email: " + userEmail));
         orderService.completeOrder(shoppingCartService
-                .getByUser(userService.get(user.getId())));
+                .getByUser(user));
     }
 }

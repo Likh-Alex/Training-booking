@@ -15,9 +15,9 @@ public class PasswordMatchValidator implements ConstraintValidator<PasswordMatch
     }
 
     @Override
-    public boolean isValid(Object pass, ConstraintValidatorContext context) {
-        Object dtoPassword = new BeanWrapperImpl(pass).getPropertyValue(password);
-        Object dtoPasswordRepeat = new BeanWrapperImpl(pass).getPropertyValue(repeatPassword);
+    public boolean isValid(Object dto, ConstraintValidatorContext context) {
+        Object dtoPassword = new BeanWrapperImpl(dto).getPropertyValue(password);
+        Object dtoPasswordRepeat = new BeanWrapperImpl(dto).getPropertyValue(repeatPassword);
         if (dtoPassword != null) {
             return dtoPassword.equals(dtoPasswordRepeat);
         } else {
