@@ -1,6 +1,11 @@
 package com.dev.spring.dto.request;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class CinemaHallRequestDto {
+    @Min(10)
+    @Max(100)
     private int capacity;
     private String description;
 

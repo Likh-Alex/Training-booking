@@ -9,6 +9,8 @@ import com.dev.spring.service.ShoppingCartService;
 import com.dev.spring.service.UserService;
 import com.dev.spring.service.mapper.ShoppingCartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,14 +37,21 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/by-user")
-    public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
-        ShoppingCart shoppingCart = shoppingCartService.getByUser(userService.get(userId));
+    public ShoppingCartResponseDto getByUser(Authentication authentication) {
+        UserDetails details = (UserDetails) authentication.getPrincipal();
+        String userEmail = details.getUsername();
+        User user = userService.findByEmail(userEmail).orElseThrow(()
+                -> new RuntimeException("No user with email: " + userEmail));
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
         return shoppingCartMapper.toDto(shoppingCart);
     }
 
     @PostMapping("/movie-sessions")
-    public void add(@RequestParam Long userId, @RequestParam Long movieSessionId) {
-        User user = userService.get(userId);
+    public void add(Authentication authentication, @RequestParam Long movieSessionId) {
+        UserDetails details = (UserDetails) authentication.getPrincipal();
+        String userEmail = details.getUsername();
+        User user = userService.findByEmail(userEmail).orElseThrow(()
+                -> new RuntimeException("No user with email: " + userEmail));
         MovieSession movieSession = movieSessionService.get(movieSessionId);
         shoppingCartService.addSession(movieSession, user);
     }
