@@ -4,23 +4,20 @@ import com.dev.spring.model.Role;
 import com.dev.spring.model.User;
 import com.dev.spring.service.RoleService;
 import com.dev.spring.service.UserService;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-@Controller
+@Component
 public class InjectData {
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public InjectData(UserService userService, RoleService roleService,
-                      PasswordEncoder passwordEncoder) {
+    public InjectData(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -33,9 +30,9 @@ public class InjectData {
         roleService.add(userRole);
 
         User admin = new User();
-        admin.setRole(adminRole);
+        admin.setRoles(List.of(adminRole));
         admin.setEmail("bob");
-        admin.setPassword(passwordEncoder.encode("1234"));
+        admin.setPassword("1234");
         userService.add(admin);
     }
 }
