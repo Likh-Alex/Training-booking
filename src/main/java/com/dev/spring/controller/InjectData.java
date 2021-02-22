@@ -4,7 +4,7 @@ import com.dev.spring.model.Role;
 import com.dev.spring.model.User;
 import com.dev.spring.service.RoleService;
 import com.dev.spring.service.UserService;
-import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class InjectData {
         roleService.add(userRole);
 
         User admin = new User();
-        admin.setRoles(List.of(adminRole));
+        admin.setRoles(Set.of(adminRole));
         admin.setEmail("bob");
         admin.setPassword("1234");
         userService.add(admin);

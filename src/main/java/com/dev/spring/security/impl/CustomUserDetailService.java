@@ -4,7 +4,6 @@ import static org.springframework.security.core.userdetails.User.builder;
 
 import com.dev.spring.model.User;
 import com.dev.spring.service.UserService;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +30,7 @@ public class CustomUserDetailService implements UserDetailsService {
         userBuilder.roles(user.getRoles()
                 .stream()
                 .map(r -> r.getRoleType().toString())
-                .collect(Collectors.joining()));
+                .toArray(String[]::new));
         return userBuilder.build();
     }
 }

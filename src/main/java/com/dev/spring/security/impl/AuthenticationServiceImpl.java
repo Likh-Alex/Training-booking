@@ -6,7 +6,7 @@ import com.dev.spring.security.AuthenticationService;
 import com.dev.spring.service.RoleService;
 import com.dev.spring.service.ShoppingCartService;
 import com.dev.spring.service.UserService;
-import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        user.setRoles(List.of(roleService.getRoleByName(String.valueOf(Role.RoleName.USER))));
+        user.setRoles(Set.of(roleService.getRoleByName(String.valueOf(Role.RoleName.USER))));
         User userFromDb = userService.add(user);
         shoppingCartService.registerNewShoppingCart(userFromDb);
         return userFromDb;
