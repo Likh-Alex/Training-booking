@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -19,7 +21,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "com.dev.spring.security"
 })
 public class AppConfig {
-    private Environment environment;
+    private final Environment environment;
 
     @Autowired
     public AppConfig(Environment environment) {
@@ -48,5 +50,10 @@ public class AppConfig {
         factoryBean.setHibernateProperties(properties);
         factoryBean.setPackagesToScan("com.dev.spring");
         return factoryBean;
+    }
+
+    @Bean
+    public PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
