@@ -2,10 +2,10 @@ package com.dev.fitbooking.service.impl;
 
 import com.dev.fitbooking.dao.ShoppingCartDao;
 import com.dev.fitbooking.dao.TicketDao;
-import com.dev.fitbooking.model.WorkoutSession;
 import com.dev.fitbooking.model.ShoppingCart;
 import com.dev.fitbooking.model.Ticket;
 import com.dev.fitbooking.model.User;
+import com.dev.fitbooking.model.WorkoutSession;
 import com.dev.fitbooking.service.ShoppingCartService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;

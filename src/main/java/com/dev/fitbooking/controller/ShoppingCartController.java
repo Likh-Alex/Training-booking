@@ -1,12 +1,12 @@
 package com.dev.fitbooking.controller;
 
 import com.dev.fitbooking.dto.response.ShoppingCartResponseDto;
-import com.dev.fitbooking.model.WorkoutSession;
 import com.dev.fitbooking.model.ShoppingCart;
 import com.dev.fitbooking.model.User;
-import com.dev.fitbooking.service.WorkoutSessionService;
+import com.dev.fitbooking.model.WorkoutSession;
 import com.dev.fitbooking.service.ShoppingCartService;
 import com.dev.fitbooking.service.UserService;
+import com.dev.fitbooking.service.WorkoutSessionService;
 import com.dev.fitbooking.service.mapper.ShoppingCartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

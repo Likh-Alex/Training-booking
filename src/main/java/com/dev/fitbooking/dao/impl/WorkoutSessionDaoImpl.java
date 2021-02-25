@@ -52,7 +52,8 @@ public class WorkoutSessionDaoImpl implements WorkoutSessionDao {
             criteriaQuery.from(WorkoutSession.class);
             return session.createQuery(criteriaQuery).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Error occurred while retrieving workout sessions", e);
+            throw new DataProcessingException("Error occurred while retrieving"
+                    + " workout sessions", e);
         }
     }
 
@@ -69,7 +70,8 @@ public class WorkoutSessionDaoImpl implements WorkoutSessionDao {
                     .setParameter("timeTo", date.atTime(LocalTime.MAX))
                     .getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can not obtain workout sessions for workout with id: "
+            throw new DataProcessingException("Can not obtain workout sessions "
+                    + "for workout with id: "
                     + workoutId + " on date: " + date, e);
         }
     }

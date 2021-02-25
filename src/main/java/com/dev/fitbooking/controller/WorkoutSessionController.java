@@ -42,7 +42,8 @@ public class WorkoutSessionController {
     public List<WorkoutSessionResponseDto> getAllByDate(
             @RequestParam Long id,
             @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
-        List<WorkoutSession> availableSessions = workoutSessionService.findAvailableSessions(id, date);
+        List<WorkoutSession> availableSessions = workoutSessionService
+                .findAvailableSessions(id, date);
         return availableSessions.stream()
                 .map(workoutSessionMapper::toDto)
                 .collect(Collectors.toList());
