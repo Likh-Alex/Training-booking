@@ -46,13 +46,13 @@ public class ShoppingCartController {
         return shoppingCartMapper.toDto(shoppingCart);
     }
 
-    @PostMapping("/movie-sessions")
-    public void add(Authentication authentication, @RequestParam Long movieSessionId) {
+    @PostMapping("/workout-sessions")
+    public void add(Authentication authentication, @RequestParam Long workoutSessionId) {
         UserDetails details = (UserDetails) authentication.getPrincipal();
         String userEmail = details.getUsername();
         User user = userService.findByEmail(userEmail).orElseThrow(()
                 -> new RuntimeException("No user with email: " + userEmail));
-        WorkoutSession workoutSession = workoutSessionService.get(movieSessionId);
+        WorkoutSession workoutSession = workoutSessionService.get(workoutSessionId);
         shoppingCartService.addSession(workoutSession, user);
     }
 }

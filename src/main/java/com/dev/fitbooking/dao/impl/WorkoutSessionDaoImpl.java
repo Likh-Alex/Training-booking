@@ -60,10 +60,10 @@ public class WorkoutSessionDaoImpl implements WorkoutSessionDao {
     public List<WorkoutSession> findAvailableSessions(Long workoutId, LocalDate date) {
         try (Session session = sessionFactory.openSession()) {
             return session
-                    .createQuery("SELECT ms FROM WorkoutSession ms "
-                            + "WHERE ms.id = :id "
-                            + "AND ms.workoutTime >= :timeFrom "
-                            + "AND ms.workoutTime <= :timeTo", WorkoutSession.class)
+                    .createQuery("SELECT ws FROM WorkoutSession ws "
+                            + "WHERE ws.id = :id "
+                            + "AND ws.workoutTime >= :timeFrom "
+                            + "AND ws.workoutTime <= :timeTo", WorkoutSession.class)
                     .setParameter("id", workoutId)
                     .setParameter("timeFrom", date.atStartOfDay())
                     .setParameter("timeTo", date.atTime(LocalTime.MAX))
